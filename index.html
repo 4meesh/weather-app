@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Pro</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="animated-bg">
+        <div class="cloud cloud1"></div>
+        <div class="cloud cloud2"></div>
+    </div>
+    <div class="container">
+        <div class="header" style="display: flex; justify-content: space-between; align-items: center;">
+            <h1>Weather Pro</h1>
+            <div>
+                <button id="showWeatherBtn" style="margin-right: 10px; padding: 8px 18px; border-radius: 20px; border: none; background: linear-gradient(45deg, #667eea, #764ba2); color: #fff; font-size: 1rem; cursor: pointer;">Weather</button>
+                <button id="showAboutBtn" style="padding: 8px 18px; border-radius: 20px; border: none; background: linear-gradient(45deg, #667eea, #764ba2); color: #fff; font-size: 1rem; cursor: pointer;">About</button>
+            </div>
+        </div>
+        <section id="weatherSection">
+            <div class="search-container">
+                <div class="search-box">
+                    <input type="text" class="search-input" placeholder="Enter city name..." id="cityInput">
+                    <button class="search-btn" onclick="getWeather()">
+                        <span>🔍</span>
+                    </button>
+                </div>
+            </div>
+            <div id="weatherContainer"></div>
+        </section>
+        <section id="aboutSection" style="display:none; max-width: 700px; margin: 60px auto 0 auto;">
+            <div class="header">
+                <h1>About the Developer</h1>
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <img src="data:image/jpeg;base64,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" alt="Ameesh Mohammed PV" style="width: 140px; height: 140px; border-radius: 50%; object-fit: cover; box-shadow: 0 4px 24px rgba(0,0,0,0.15); margin-bottom: 24px;">
+                <h2 style="color: #fff; margin-bottom: 8px;">Ameesh Mohammed PV <span style="font-size: 1rem; color: #a0aec0;">(He/Him)</span></h2>
+                <div style="color: #a0aec0; font-size: 1.1rem; margin-bottom: 16px;">Full Stack Developer | AI & ML Enthusiast | Design Lead @ IEEE, MULEARN, IEDC</div>
+                <div style="color: #e0e7ff; font-size: 1rem; text-align: center; max-width: 500px; margin-bottom: 24px;">
+                    Passionate about building modern web apps, AI/ML, and leading creative teams. Experienced in full stack development, design, and innovation leadership. Always open to new opportunities and collaborations!
+                </div>
+                <div style="display: flex; gap: 24px; margin-bottom: 32px;">
+                    <a href="mailto:ameeshmohammedpv@gmail.com" style="color: #fff; text-decoration: none; font-size: 1.5rem;" title="Email"><span>📧</span></a>
+                    <a href="https://www.linkedin.com/in/ameeshmohammedpv/" target="_blank" style="color: #0e76a8; text-decoration: none; font-size: 1.5rem;" title="LinkedIn"><span>in</span></a>
+                    <a href="https://github.com/ameeshmohammedpv" target="_blank" style="color: #fff; text-decoration: none; font-size: 1.5rem;" title="GitHub"><span>🐙</span></a>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script src="script.js"></script>
+    <script>
+        // Section toggling logic
+        const weatherSection = document.getElementById('weatherSection');
+        const aboutSection = document.getElementById('aboutSection');
+        const showWeatherBtn = document.getElementById('showWeatherBtn');
+        const showAboutBtn = document.getElementById('showAboutBtn');
+        showWeatherBtn.onclick = function() {
+            weatherSection.style.display = '';
+            aboutSection.style.display = 'none';
+        };
+        showAboutBtn.onclick = function() {
+            weatherSection.style.display = 'none';
+            aboutSection.style.display = '';
+        };
+    </script>
+</body>
+</html> 
